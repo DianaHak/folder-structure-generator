@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Folder Structure Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <h1>Folder Structure Generator</h1>
+        <p>Create, edit, import, and export clean ASCII folder trees for GitHub READMEs.</p>
+      </div>
+      <div class="topbar-actions">
+        <label class="button secondary upload-label" for="folderInput">Upload folder</label>
+        <input type="file" id="folderInput" webkitdirectory directory multiple hidden />
+        <button id="copyBtn" class="button">Copy output</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="panel left-panel">
+        <div class="panel-header">
+          <h2>Tree editor</h2>
+          <div class="toolbar">
+            <button id="addRootFolderBtn" class="button small">Add root folder</button>
+            <button id="addRootFileBtn" class="button small secondary">Add root file</button>
+            <button id="expandAllBtn" class="button small ghost">Expand all</button>
+            <button id="collapseAllBtn" class="button small ghost">Collapse all</button>
+            <button id="clearBtn" class="button small danger">Clear</button>
+          </div>
+        </div>
+
+        <div class="hint-box">
+          <strong>Quick tips:</strong>
+          <span>double-click a name to rename, use the + buttons to add items, and drag items by the handle to reorder.</span>
+        </div>
+
+        <div id="treeContainer" class="tree-container"></div>
+      </section>
+
+      <section class="panel right-panel">
+        <div class="panel-header">
+          <h2>ASCII output</h2>
+          <div class="toolbar">
+            <button id="downloadBtn" class="button small secondary">Download .txt</button>
+          </div>
+        </div>
+
+        <textarea id="output" class="output" spellcheck="false" readonly></textarea>
+      </section>
+    </main>
+  </div>
+
+  <template id="nodeTemplate">
+    <div class="tree-node" draggable="true">
+      <div class="node-row">
+        <button class="toggle" type="button" aria-label="Toggle children"></button>
+        <span class="drag-handle" title="Drag to reorder">⋮⋮</span>
+        <span class="node-icon" aria-hidden="true"></span>
+        <span class="node-name" tabindex="0"></span>
+        <input class="node-input hidden" type="text" maxlength="120" />
+        <div class="node-actions">
+          <button class="mini-btn add-folder" type="button" title="Add folder">+Folder</button>
+          <button class="mini-btn add-file" type="button" title="Add file">+File</button>
+          <button class="mini-btn delete" type="button" title="Delete">Delete</button>
+        </div>
+      </div>
+      <div class="children"></div>
+    </div>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
